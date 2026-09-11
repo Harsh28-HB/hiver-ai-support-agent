@@ -4,6 +4,12 @@ Reproducible support-intelligence pipeline for the Hiver SDE Intern take-home as
 
 This is an evaluated research prototype, not a production support system. Final metrics show modest intent performance and weak escalation performance; response quality was not LLM-judged because no API key was configured.
 
+## Live Demo
+
+Open the deployed Streamlit application:
+
+[AmazonHelp AI Support Intelligence](https://hiver-ai-support-agent-dzdycqjbhnahuo4ca837lh.streamlit.app/)
+
 ## Problem Statement
 
 The system should classify AmazonHelp customer messages, retrieve similar historical conversations, ground replies in historical support behavior, and decide whether to auto-handle or escalate with an explicit reason. Banking77 is out of scope. The primary dataset is Kaggle's [Customer Support on Twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter).
@@ -100,6 +106,12 @@ python run_pipeline.py
 ```
 
 The local agent returns JSON containing `intent`, `confidence`, top-three `retrieved_evidence`, `reply`, `decision`, and `reason`. It uses Knowledge-only local TF-IDF components and does not require an LLM API key.
+
+To launch the UI locally:
+
+```powershell
+streamlit run app.py
+```
 
 ## Project Structure
 
