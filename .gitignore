@@ -1,0 +1,32 @@
+# Secrets and local environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# Python/editor caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Raw and generated working data can be large or sensitive.
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Keep human Golden annotations available for review/submission.
+data/golden/*
+!data/golden/.gitkeep
+!data/golden/golden_candidates.csv
+!data/golden/golden_set.csv
+
+# Keep reproducible result CSVs and Markdown reports.
+
+# Transient local logs
+*.log

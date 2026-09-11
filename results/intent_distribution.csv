@@ -1,0 +1,12 @@
+intent,knowledge_customer_messages,knowledge_customer_message_pct,tfidf_anchor_terms
+delivery_late_or_missing,11515,13.5,"delivery, delivered, package, wait"
+order_tracking_or_status,4632,5.43,"order, ordered"
+refund_return_or_cancellation,5382,6.31,"refund, money"
+prime_membership_or_benefits,2867,3.36,prime
+account_email_or_login,3012,3.53,"email, account"
+payment_or_card_charge,1371,1.61,
+gift_card_or_promotion,596,0.7,
+item_wrong_damaged_or_missing,621,0.73,
+customer_service_contact_or_escalation,9962,11.68,"customer, service, call, contact"
+website_app_or_technical_issue,7071,8.29,
+other_or_unclear,38286,44.88,
