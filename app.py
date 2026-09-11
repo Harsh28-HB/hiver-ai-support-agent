@@ -41,7 +41,7 @@ st.markdown(
     .panel { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; box-shadow: 0 8px 25px rgba(30, 51, 65, .05); }
     .metric { background: #f7fafb; border: 1px solid var(--line); border-radius: 12px; padding: 1rem; min-height: 100px; }
     .metric-label { color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .metric-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; font-weight: 700; margin-top: .45rem; overflow-wrap: anywhere; }
+    .metric-value { color: #17212b !important; font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; font-weight: 700; line-height: 1.2; margin-top: .45rem; overflow-wrap: anywhere; }
     .metric-sub { color: var(--muted); font-size: .8rem; margin-top: .25rem; }
     .response { background: #17212b; border-radius: 14px; color: #f7fbfd; padding: 1.5rem; margin: .6rem 0 1rem; }
     .response-label { color: #a9c9ff; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
