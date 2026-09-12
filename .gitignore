@@ -19,6 +19,8 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/conversations.csv
+!data/processed/knowledge_labels.csv
 
 # Keep human Golden annotations available for review/submission.
 data/golden/*

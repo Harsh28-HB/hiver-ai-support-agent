@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -11,6 +13,10 @@ import streamlit as st
 from src.agent import AmazonHelpAgent
 
 ROOT = Path(__file__).resolve().parent
+REQUIRED_AGENT_ARTIFACTS = (
+    ROOT / "data" / "processed" / "conversations.csv",
+    ROOT / "data" / "processed" / "knowledge_labels.csv",
+)
 EXAMPLES = {
     "Delivery delay": "My Amazon order was supposed to arrive yesterday and it still hasn't arrived.",
     "Track an order": "Where can I track my order?",
@@ -61,7 +67,42 @@ st.markdown(
 
 @st.cache_resource(show_spinner="Loading Knowledge-only support intelligence...")
 def load_agent() -> AmazonHelpAgent:
+    _ensure_agent_artifacts()
     return AmazonHelpAgent(ROOT)
+
+
+def _ensure_agent_artifacts() -> None:
+    """Build missing runtime artifacts using the existing repository pipeline."""
+    missing = [path for path in REQUIRED_AGENT_ARTIFACTS if not path.exists()]
+    if not missing:
+        return
+    raw_files = sorted((ROOT / "data" / "raw").glob("*.csv"))
+    if not raw_files:
+        names = ", ".join(path.relative_to(ROOT).as_posix() for path in missing)
+        raise RuntimeError(
+            f"Required agent artifacts are missing ({names}), and no CSV exists in data/raw/ "
+            "to rebuild them. Add the dataset to the deployment or include the processed artifacts."
+        )
+    try:
+        if not (ROOT / "data" / "processed" / "conversations.csv").exists():
+            subprocess.run(
+                [sys.executable, "run_pipeline.py"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        if not (ROOT / "data" / "processed" / "knowledge_labels.csv").exists():
+            subprocess.run(
+                [sys.executable, "-m", "src.create_knowledge_labels"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+    except subprocess.CalledProcessError as error:
+        detail = (error.stderr or error.stdout or "pipeline failed").strip()[-1000:]
+        raise RuntimeError(f"Could not rebuild agent artifacts: {detail}") from error
 
 
 @st.cache_data
